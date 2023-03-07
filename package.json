@@ -1,0 +1,27 @@
+{
+  "name": "biz-bank",
+  "version": "1.0.0",
+  "description": "A database that keeps track of employees",
+  "main": "server.js",
+  "scripts": {
+    "test": "node server.js",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/itlleat/biz-bank.git"
+  },
+  "keywords": [
+    "database"
+  ],
+  "author": "scott schulman",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/itlleat/biz-bank/issues"
+  },
+  "homepage": "https://github.com/itlleat/biz-bank#readme",
+  "dependencies": {
+    "inquirer": "^8.2.4",
+    "sql": "^0.78.0"
+  }
+}
