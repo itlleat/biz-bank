@@ -19,5 +19,5 @@ function viewEmployeesByManager() { connection.query('SELECT * FROM employees JO
 function addEmployee() { inquirer.prompt([ { type: 'input', name: 'first_name', message: 'Enter the employee\'s first name:' }, { type: 'input', name: 'last_name', message: 'Enter the employee\'s last name:' }, { type: 'input', name: 'role_id', message: 'Enter the employee\'s role ID:' }, { type: 'input', name: 'manager_id', message: 'Enter the employee\'s manager ID:' } ]).then((answer) => { connection.query('INSERT INTO employees SET ?', answer, (err, res) => { if (err) throw err; console.log('Employee added.'); promptUser(); }); }); } 
 
 // fill in the details for each function, such as writing the SQL queries to retrieve or update data in the database.
-// In addition, you'll need to create the database schema and populate it with data for testing purposes. You'll also need to handle errors that may occur during the database operations and include validation to ensure that the user enters the correct data types and formats.
-// Overall, building a CMS using a command-line interface can be a complex task, but it can be a great way to learn about database management and back-end development.
+// create the database schema and populate it with data for testing purposes. handle errors that may occur during the database operations and include validation to ensure that the user enters the correct data types and formats.
+
