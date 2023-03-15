@@ -27,7 +27,6 @@ CREATE TABLE roles (
   name VARCHAR(30) NOT NULL
 );
 
-
 -- verify 
 CREATE TABLE employees (
   id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -36,4 +35,19 @@ CREATE TABLE employees (
   FOREIGN KEY (department)
   REFERENCES department(id)
   ON DELETE SET NULL
+);
+
+CREATE TABLE roleId (
+    -- verify
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(8) NOT NULL,
+    roles INT, 
+    FOREIGN KEY (employees),
+    ON DELETE SET NULL
+);
+
+CREATE TABLE salaries (
+    -- verify
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(10) NOT NULL
 );

@@ -29,5 +29,5 @@ INSERT INTO employees (name, roles)
 VALUES ("Job Title", 1),
        ("Role Id", 2),
        ("Department", 3),
-       ("salary", 1,000,000);
+       ("salary", 4);
     
