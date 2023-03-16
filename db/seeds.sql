@@ -26,8 +26,11 @@ VALUES ("Endangered Animal Protector"),
        ("Mob Cut");
 
 INSERT INTO employees (name, roles)
-VALUES ("Job Title", 1),
-       ("Role Id", 2),
-       ("Department", 3),
-       ("salary", 4);
+VALUES ("Job Title"),
+       ("Role Id"),
+       ("Department"),
+       ("salary");
+
+
+
     
