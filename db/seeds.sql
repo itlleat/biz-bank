@@ -25,7 +25,7 @@ INSERT INTO departments (departmentID, name) VALUES
 (6, 'Physical Security'),
 (7, 'Law Team');
 
-INSERT INTO revenue (salariesID, departmentID, employeesID, managersID, salaryType, salarymount, salaryDate) VALUES
+INSERT INTO salaries (salariesID, departmentID, employeesID, managersID, salaryType, salarymount, salaryDate) VALUES
 (1, 1, 1, 1, 'Salary', 95000, '2023-02-09'),
 (2, 2, 1, 2, 'Contract', 115000, '2022-08-14'),
 (1, 3, 2, 3, 'Salary', 160000, '2021-07-04'),
@@ -34,7 +34,7 @@ INSERT INTO revenue (salariesID, departmentID, employeesID, managersID, salaryTy
 (1, 6, 4, 2, 'Salary', 25000,'2022-09-10'),
 (3, 7, 1, 1, 'Retainer', 3,000,000, '2016-03-28');
 
-INSERT INTO expenses (expensesID, departmentID, employeesID, managersID,) VALUES
+INSERT INTO expenses (expensesID, departmentID, employeesID, managersID, expensesType, expensesAmount, expensesDate) VALUES
 (1, 1, 3, 2),
 (2, 2, 2, 1),
 (3, 3, 5, 3),
@@ -61,7 +61,7 @@ INSERT INTO cashFlow (cashFlowID, departmentID) VALUES
 (1, 6),
 (1, 7);
 
-INSERT INTO revenue (revenue, name) VALUES
+INSERT INTO revenue (revenueID, departmentID, revenueType, revenueAmount) VALUES
 (1, ''),
 (2, ''),
 (3, ''),
@@ -70,7 +70,7 @@ INSERT INTO revenue (revenue, name) VALUES
 (6, ''),
 (7, '');
 
-INSERT INTO projections (projectionsID, ) VALUES
+INSERT INTO projections (projectionsID, departmentID, employeesID, name, projectionsType, projectionsAmount) VALUES
 (1, ''),
 (2, ''),
 (3, ''),
@@ -79,7 +79,7 @@ INSERT INTO projections (projectionsID, ) VALUES
 (6, ''),
 (7, '');
 
-INSERT INTO employees (employeesID, name) VALUES
+INSERT INTO employees (employeesID, name, departmentID,) VALUES
 (1, ''),
 (2, ''),
 (3, ''),
@@ -88,7 +88,7 @@ INSERT INTO employees (employeesID, name) VALUES
 (6, ''),
 (7, '');
 
-INSERT INTO managers (managersID, name) VALUES
+INSERT INTO managers (managersID, name, departmentID) VALUES
 (1, ''),
 (2, ''),
 (3, ''),
