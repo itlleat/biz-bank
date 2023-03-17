@@ -16,21 +16,85 @@
 -- WHEN I choose to update an employee role
 -- THEN I am prompted to select an employee to update and their new role and this information is updated in the database 
 
-INSERT INTO roles (name)
-VALUES ("Endangered Animal Protector"),
-       ("Guy Who laughs Uncomfortably"),
-       ("Enabler Of Said Laugher"),
-       ("Junior Enabler"),
-       ("Manager"),
-       ("Manager's Manager"),
-       ("Mob Cut");
+INSERT INTO departments (departmentID, name) VALUES
+(1, ''),
+(2, ''),
+(3, ''),
+(4, ''),
+(5, ''),
+(6, ''),
+(7, '');
 
-INSERT INTO employees (name, roles)
-VALUES ("Job Title"),
-       ("Role Id"),
-       ("Department"),
-       ("salary");
+INSERT INTO revenue (revenueID, departmentID, employeesID, managersID, revenueType, revenueAmount, revenueDate) VALUES
+(1, ''),
+(2, ''),
+(3, ''),
+(4, ''),
+(5, ''),
+(6, ''),
+(7, '');
 
+INSERT INTO expenses (expensesID, departmentID, employeesID, managersID,) VALUES
+(1, ''),
+(2, ''),
+(3, ''),
+(4, ''),
+(5, ''),
+(6, ''),
+(7, '');
 
+INSERT INTO profit (profitID, name) VALUES
+(1, ''),
+(2, ''),
+(3, ''),
+(4, ''),
+(5, ''),
+(6, ''),
+(7, '');
+
+INSERT INTO cashFlow (cashFlowID, name) VALUES
+(1, ''),
+(2, ''),
+(3, ''),
+(4, ''),
+(5, ''),
+(6, ''),
+(7, '');
+
+INSERT INTO salaries (salariesID, name) VALUES
+(1, ''),
+(2, ''),
+(3, ''),
+(4, ''),
+(5, ''),
+(6, ''),
+(7, '');
+
+INSERT INTO projections (projectionsID, name) VALUES
+(1, ''),
+(2, ''),
+(3, ''),
+(4, ''),
+(5, ''),
+(6, ''),
+(7, '');
+
+INSERT INTO employees (employeesID, name) VALUES
+(1, ''),
+(2, ''),
+(3, ''),
+(4, ''),
+(5, ''),
+(6, ''),
+(7, '');
+
+INSERT INTO managers (managersID, name) VALUES
+(1, ''),
+(2, ''),
+(3, ''),
+(4, ''),
+(5, ''),
+(6, ''),
+(7, '');
 
     
