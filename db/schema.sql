@@ -32,6 +32,16 @@
 
 -- THEN I am prompted to select an employee to update and their new role and this information is updated in the database
 
+
+-- Fixed the typo in the revenue table (revenueDate column name).
+-- Made the expensesType column NOT NULL.
+-- Renamed the CONSTRAINT definitions in the salaries table to have unique names.
+-- Removed the employees column from the employees table.
+-- Added ON DELETE SET NULL to the department foreign key constraint in the employees table.
+-- Removed the managersID column from the managers table.
+-- Added ON DELETE SET NULL to the employee foreign key constraint in the managers table.
+
+
 DROP DATABASE IF EXISTS departments_db;
 
 CREATE DATABASE departments_db;
@@ -40,7 +50,6 @@ USE departments_db;
 
 CREATE TABLE
     departments (
-        -- verify
         id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
         name VARCHAR(30) NOT NULL
     );
@@ -50,8 +59,9 @@ CREATE TABLE
         revenueID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
         revenueType VARCHAR(45) NOT NULL,
         revenueAmount DECIMAL (10, 2),
-        rvenueDate DATE,
-        FOREIGN KEY (departments),
+        revenueDate DATE,
+        departmentsID INT,
+        FOREIGN KEY (departmentsID),
         REFERENCES departments(id)
     );
 
@@ -59,7 +69,7 @@ CREATE TABLE
     expenses (
         expensesID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
         departmentsID INT,
-        expensesType VARCHAR(45),
+        expensesType VARCHAR(45) NOT NULL,
         expensesAmount DECIMAL(10, 2),
         expensesDate DATE,
         FOREIGN KEY (departmentsID),
@@ -85,16 +95,19 @@ CREATE TABLE
         REFERENCES departments(id)
     ),
 CREATE TABLE
-    salaries (
-        -- verify
+  salaries (
         salariesID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
         salariesAmount DECIMAL(10, 2),
-        CONSTRAINT FK_1 FOREIGN KEY (department),
-        REFERENCES department(id),
-        CONSTRAINT FK_2 FOREIGN KEY (employees) REFERENCES employees(id),
-        CONSTRAINT FK_1 FOREIGN KEY (managers),
+        departmentID INT,
+        employeeID INT,
+        managerID INT,
+        CONSTRAINT FK_salaries_department FOREIGN KEY (departmentID)
+        REFERENCES departments(id),
+        CONSTRAINT FK_salaries_employee FOREIGN KEY (employeeID)
+        REFERENCES employees(id),
+        CONSTRAINT FK_salaries_manager FOREIGN KEY (managerID)
         REFERENCES managers(id)
-    );
+  );
 
 CREATE TABLE
     projections (
@@ -109,19 +122,19 @@ CREATE TABLE
     employees (
         id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
         name VARCHAR(30) NOT NULL,
-        employees INT,
-        FOREIGN KEY (department) REFERENCES department(id) ON DELETE
-        SET NULL
+        departmentID INT,
+        FOREIGN KEY (departmentID) 
+        REFERENCES departments(id) ON DELETE SET NULL
     );
 
 CREATE TABLE
     managers (
         id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
         name VARCHAR(30) NOT NULL,
-        managersID INT,
-        CONSTRAINT FK_1 FOREIGN KEY (department),
-        REFERENCES department(id),
-        CONSTRAINT FK_2 FOREIGN KEY (employees) REFERENCES employees(id),
-        ON DELETE
-        SET NULL
+        departmentID INT,
+        employeeID INT,
+        CONSTRAINT FK_managers_department FOREIGN KEY (departmentID),
+        REFERENCES departments(id),
+        CONSTRAINT FK_managers_employee FOREIGN KEY (employeeID) 
+        REFERENCES employees(id) ON DELETE SET NULL
     );
