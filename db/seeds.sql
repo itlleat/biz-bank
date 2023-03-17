@@ -17,24 +17,51 @@
 -- THEN I am prompted to select an employee to update and their new role and this information is updated in the database 
 
 INSERT INTO departments (departmentID, name) VALUES
-(1, ''),
-(2, ''),
-(3, ''),
-(4, ''),
-(5, ''),
-(6, ''),
-(7, '');
+(1, 'Manufacturing'),
+(2, 'Research and Development'),
+(3, 'Genetic Engineering'),
+(4, 'Mutational Research'),
+(5, 'Data Security'),
+(6, 'Physical Security'),
+(7, 'Law Team');
 
-INSERT INTO revenue (revenueID, departmentID, employeesID, managersID, revenueType, revenueAmount, revenueDate) VALUES
-(1, ''),
-(2, ''),
-(3, ''),
-(4, ''),
-(5, ''),
-(6, ''),
-(7, '');
+INSERT INTO revenue (salariesID, departmentID, employeesID, managersID, salaryType, salarymount, salaryDate) VALUES
+(1, 1, 1, 1, 'Salary', 95000, '2023-02-09'),
+(2, 2, 1, 2, 'Contract', 115000, '2022-08-14'),
+(1, 3, 2, 3, 'Salary', 160000, '2021-07-04'),
+(2, 4, 4, 1, 'Contract', 480000, '2023-03-14'),
+(1, 5, 7, 1, 'Salary', 210000, '2022-04-20'),
+(1, 6, 4, 2, 'Salary', 25000,'2022-09-10'),
+(3, 7, 1, 1, 'Retainer', 3,000,000, '2016-03-28');
 
 INSERT INTO expenses (expensesID, departmentID, employeesID, managersID,) VALUES
+(1, 1, 3, 2),
+(2, 2, 2, 1),
+(3, 3, 5, 3),
+(4, 4, 1, 3),
+(5, 5, 6, 1),
+(6, 6, 4, 1),
+(7, 7, 7, 2);
+
+INSERT INTO profit (profitID, departmentID) VALUES
+(1, 1),
+(1, 2),
+(1, 3),
+(1, 4),
+(1, 5),
+(1, 6),
+(1, 7);
+
+INSERT INTO cashFlow (cashFlowID, departmentID) VALUES
+(1, 1),
+(1, 2),
+(1, 3),
+(1, 4),
+(1, 5),
+(1, 6),
+(1, 7);
+
+INSERT INTO revenue (revenue, name) VALUES
 (1, ''),
 (2, ''),
 (3, ''),
@@ -43,34 +70,7 @@ INSERT INTO expenses (expensesID, departmentID, employeesID, managersID,) VALUES
 (6, ''),
 (7, '');
 
-INSERT INTO profit (profitID, name) VALUES
-(1, ''),
-(2, ''),
-(3, ''),
-(4, ''),
-(5, ''),
-(6, ''),
-(7, '');
-
-INSERT INTO cashFlow (cashFlowID, name) VALUES
-(1, ''),
-(2, ''),
-(3, ''),
-(4, ''),
-(5, ''),
-(6, ''),
-(7, '');
-
-INSERT INTO salaries (salariesID, name) VALUES
-(1, ''),
-(2, ''),
-(3, ''),
-(4, ''),
-(5, ''),
-(6, ''),
-(7, '');
-
-INSERT INTO projections (projectionsID, name) VALUES
+INSERT INTO projections (projectionsID, ) VALUES
 (1, ''),
 (2, ''),
 (3, ''),
