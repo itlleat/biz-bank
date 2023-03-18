@@ -1,21 +1,3 @@
--- GIVEN a command-line application that accepts user input
--- WHEN I start the application
--- THEN I am presented with the following options: view all departments, view all roles, view all employees, add a department, add a role, add an employee, and update an employee role
--- WHEN I choose to view all departments
--- THEN I am presented with a formatted table showing department names and department ids
--- WHEN I choose to view all roles
--- THEN I am presented with the job title, role id, the department that role belongs to, and the salary for that role
--- WHEN I choose to view all employees
--- THEN I am presented with a formatted table showing employee data, including employee ids, first names, last names, job titles, departments, salaries, and managers that the employees report to
--- WHEN I choose to add a department
--- THEN I am prompted to enter the name of the department and that department is added to the database
--- WHEN I choose to add a role
--- THEN I am prompted to enter the name, salary, and department for the role and that role is added to the database
--- WHEN I choose to add an employee
--- THEN I am prompted to enter the employee’s first name, last name, role, and manager, and that employee is added to the database
--- WHEN I choose to update an employee role
--- THEN I am prompted to select an employee to update and their new role and this information is updated in the database 
-
 INSERT INTO departments (name) VALUES
 (1, 'Manufacturing'),
 (2, 'Research and Development'),
@@ -87,15 +69,73 @@ INSERT INTO employees (employeesID, name, departmentID,) VALUES
 (4, 'Emily Davis', 4),
 (5, 'Mike Brown', 5),
 (6, 'Karen Lee', 6),
-(7, 'David Kim', 7);
+(7, 'David Kim', 7),
+(8, 'John Doe', 1),
+(9, 'Jane Smith', 2),
+(10, 'Bob Johnson', 3),
+(11, 'Emily Davis', 4),
+(12, 'Mike Brown', 5),
+(13, 'Karen Lee', 6),
+(14, 'David Kim', 7),
+(15, 'John Doe', 1),
+(16, 'Jane Smith', 2),
+(17, 'Bob Johnson', 3),
+(18, 'Emily Davis', 4),
+(19, 'Mike Brown', 5),
+(20, 'Karen Lee', 6),
+(21, 'David Kim', 7),
+(22, 'John Doe', 1),
+(23, 'Jane Smith', 2),
+(24, 'Bob Johnson', 3),
+(25, 'Emily Davis', 4),
+(26, 'Mike Brown', 5),
+(27, 'Karen Lee', 6),
+(28, 'David Kim', 7),
+(29, 'John Doe', 1),
+(30, 'Jane Smith', 2),
+(31, 'Bob Johnson', 3),
+(32, 'Emily Davis', 4),
+(33, 'Mike Brown', 5),
+(34, 'Karen Lee', 6),
+(35, 'David Kim', 7),
+(36, 'John Doe', 1),
+(37, 'Jane Smith', 2),
+(38, 'Bob Johnson', 3),
+(39, 'Emily Davis', 4),
+(40, 'Mike Brown', 5),
+(41, 'Karen Lee', 6),
+(42, 'David Kim', 7),
+(43, 'John Doe', 1),
+(44, 'Jane Smith', 2),
+(45, 'Bob Johnson', 3),
+(46, 'Emily Davis', 4),
+(47, 'Mike Brown', 5),
+(48, 'Karen Lee', 6),
+(49, '', 7),
+(50, '', 1),
+(51, '', 2),
+(52, '', 3),
+(53, '', 4),
+(54, '', 5),
+(55, '', 6),
+(56, '', 7),
+(57, '', 1),
+(58, '', 2),
+(59, '', 3),
+(60, '', 7);
 
 INSERT INTO managers (managersID, name, departmentID) VALUES
-(1, 'Susan Chen', 1),
-(2, 'Mark Patel', 2),
-(3, 'Jessica Lee', 3),
-(4, 'Kevin Singh', 4),
-(5, 'Alex Park', 5),
-(6, 'Michelle Wong', 6),
-(7, 'Daniel Kim', 7);
+(1, '', 1),
+(2, '', 2),
+(3, '', 3),
+(4, '', 4),
+(5, '', 5),
+(6, '', 6),
+(7, '', 7),
+(8, '', 1),
+(9, '', 2),
+(10, '', 3),
+(11, '', 4),
+(12, '', 5);
 
     
