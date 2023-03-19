@@ -1,4 +1,4 @@
-DROP DATABASE IF EXISTS departments_db;
+uioahDROP DATABASE IF EXISTS departments_db;
 
 CREATE DATABASE departments_db;
 
