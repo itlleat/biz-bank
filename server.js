@@ -72,8 +72,19 @@ function promptUser() {
           break;
         case "View all employees by department":
           // Code to view here
-          connection.query("SELECT * FROM ", (err,res) => {
+          connection.query("SELECT * FROM department", (err,departments) => {
             if (err) throw err;
+            const departmentChoices = departments.map((department) => department.name);
+            inquirer
+            .prompt ([
+              {
+              type: "list",
+              name: "department",
+              message: "Which department would you like to view?",
+              choices: departmentChoices,
+              },
+            ])
+            .thenjewu
             console.table(res);
             promptUser();
           });
