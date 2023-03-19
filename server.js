@@ -84,9 +84,23 @@ function promptUser() {
               choices: departmentChoices,
               },
             ])
-            .thenjewu
-            console.table(res);
-            promptUser();
+            .then ((answer) => {
+              connection.query(
+                `SELECT e.id, e.first_name, e.last_name, r.title, d.name AS department, r.salary,
+                CONCAT(m.first_name, '', m.last_name) AS manager
+                FROM employee e JOIN role r ON e.role_id = r.id
+                JOIN role r ON e.role_id = d.id
+                JOIN department d ON r.department_id = d.id
+                LEFT JOIN employee m ON e.manager_id = m.id
+                WHERE d.name = ?`,
+               [answer.department],
+               (err, res) => {
+                if (err) throw err;
+                console.table(res);
+                promptUser();
+               } 
+              );
+            });
           });
           break;
         case "View all employees by manager":
