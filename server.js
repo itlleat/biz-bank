@@ -64,27 +64,73 @@ function promptUser() {
       switch (answer.action) {
         case "View all employees":
           // Code to view here
+          connection.query("SELECT * FROM employees", (err, res) => {
+            if (err) throw err;
+            console.table(res);
+            promptUser();
+          });
           break;
         case "View all employees by department":
           // Code to view here
+          connection.query("SELECT * FROM ", (err,res) => {
+            if (err) throw err;
+            console.table(res);
+            promptUser();
+          });
           break;
         case "View all employees by manager":
           // Code to view
+          connection.query("SELECT * FROM
+          ", (err,res) => {
+            if (err) throw err;
+            console.table(res);
+            promptUser();
+          });
           break;
         case "Add employee":
           // Code to add
+          connection.query("SELECT * FROM
+          ", (err,res) => {
+            if (err) throw err;
+            console.table(res);
+            promptUser();
+          });
           break;
         case "Remove employee":
           // code to remove
+          connection.query("SELECT * FROM
+          ", (err,res) => {
+            if (err) throw err;
+            console.table(res);
+            promptUser();
+          });
           break;
         case "Update employee role":
           // code to update
+          connection.query("SELECT * FROM
+          ", (err,res) => {
+            if (err) throw err;
+            console.table(res);
+            promptUser();
+          });
           break;
         case "Update employee manager":
           // code to update manager
+          connection.query("SELECT * FROM
+          ", (err,res) => {
+            if (err) throw err;
+            console.table(res);
+            promptUser();
+          });
           break;
         case "Exit":
           // code to exit
+          connection.query("SELECT * FROM
+          ", (err,res) => {
+            if (err) throw err;
+            console.table(res);
+            promptUser();
+          }
           break;
         default:
           console.log("Invalid action, please try again");
