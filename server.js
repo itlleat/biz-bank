@@ -104,48 +104,158 @@ function promptUser() {
           });
           break;
         case "View all employees by manager":
-          // Code to view
-          connection.query("SELECT * FROM
-          ", (err,res) => {
-            if (err) throw err;
-            console.table(res);
-            promptUser();
+          connection.query("SELECT * FROM employee WHERE manager_id IS NOT NULL", 
+          (err, managers) => {
+            if(err) throw err;
+            const managerChoices = managers.map((manager) => `${manager.first_name} 
+            ${manager.last_name}`);
+            inquirer.prompt([
+              {
+                type: "list",
+                name: "manager",
+                message: "Please select a manager",
+                choices: managerChoices,
+              }
+            ]).then((answer) => {
+              const[firstName, lastName] = answer.manager.split(" ");
+              connection.query(
+                `SELECT e.id, e.first_name, e.last_name, r.title, d.name AS department, r.salary,
+                CONCAT(m.first_name, '',m.last_name) AS manager
+                FROM employee e JOIN role r ON e.role_id = r.id
+                JOIN department d ON r.department_id = d.id
+                LEFT JOIN employee m ON e.manager_id = m.id
+                WHERE m.first_name = ? AND m.last_name = ?`,
+                [firstName, lastName],
+                (err, res) => {
+                  if (err) throw err;
+                  console.table(res);
+                  promptUser();
+                }
+              );
+            });
+          };
           });
           break;
         case "Add employee":
-          // Code to add
-          connection.query("SELECT * FROM
-          ", (err,res) => {
+          connection.query("SELECT * FROM role", (err, roles) => {
             if (err) throw err;
-            console.table(res);
-            promptUser();
+            const roleChoices = roles.map((role) => role.title);
+            inquirer
+            .prompt([
+              {
+                type: "input",
+                name: "first_name",
+                message: "Please enter the employee's first name.",
+              },
+              {
+                type: "input",
+                name: "last_name",
+                message: "Please enter the employee's last name.",
+              },
+              {
+                type: "list",
+                name: "role",
+                message: "Please choose the employee's role."
+                choices: roleChoices,
+              },
+            ])
+            .then((answer) => {
+              const role = roles.find((role) => role.title === answer.role);
+              connection.query(
+                "INSERT INTO employee SET ?",
+                {
+                  first_name: answer.first_name,
+                  last_name: answer.last_name,
+                  role_id: role.id,
+                },
+                (err) => {
+                  if (err) throw err;
+                  console.log("Employee added successfully!");
+                }
+              );
+            });
           });
           break;
         case "Remove employee":
-          // code to remove
-          connection.query("SELECT * FROM
-          ", (err,res) => {
+          connection.query("SELECT * FROM employee", (err, employees) => {
             if (err) throw err;
-            console.table(res);
-            promptUser();
-          });
-          break;
+            const employeeChoices = employees.map((employee) => `${employee.first_name} ${employee.last_name}`
+            );
+            inquirer
+            .prompt([
+              {
+                type: "list",
+                name: "employee",
+                message: "Please select the employee you would like to TERMINATE!"
+                choices: employeeChoices,
+              },
+            ])
+            .then((answer) => {
+              const [firstName, lastName] = answer.employee.split(" ");
+              connection.query(
+                "DELETE FROM employee WHERE first_name = ? AND last_name = ?",
+                [firstName, lastName],
+                (err) =>{
+                  if (err) throw err;
+                  console.log("EMPLOYEE TERMINATED - BRUTAL!!💀");
+                  promptUser();
+                }
+              );
+            });
+        break;
         case "Update employee role":
-          // code to update
-          connection.query("SELECT * FROM
-          ", (err,res) => {
+          connection.query("SELECT * FROM employee", (err, employees) => {
             if (err) throw err;
-            console.table(res);
-            promptUser();
-          });
+            const employeeChoices = employees.map((employee) => `${employee.first_name} ${employee.last_name}`
+            );
+            inquirer
+            .prompt([
+              {
+                type: "list",
+                name: "employee",
+                message: "Please select the employee you would like to update!"
+                choices: employeeChoices,
+              },
+            ])
+            .then((answer) => {
+              const [firstName, lastName] = answer.employee.split(" ");
+              connection.query(
+                "UPDATE FROM employee WHERE first_name = ? AND last_name = ?",
+                [firstName, lastName],
+                (err) =>{
+                  if (err) throw err;
+                  console.log("EMPLOYEE UPDATED - GREAT JOB!!🍎");
+                  promptUser();
+                }
+              );
+            });
           break;
         case "Update employee manager":
-          // code to update manager
-          connection.query("SELECT * FROM
-          ", (err,res) => {
+          connection.query("SELECT * FROM employee", (err, employees) => {
             if (err) throw err;
-            console.table(res);
-            promptUser();
+            const employeeChoices = employees.map((employee) => `${employee.first_name} ${employee.last_name}`
+            );
+            inquirer
+            .prompt([
+              {
+                type: "list",
+                name: "employee",
+                message: "Please select the employee you would like to update!"
+                choices: employeeChoices,
+              },
+            ])
+            .then((answer) => {
+              const [firstName, lastName] = answer.employee.split(" ");
+              connection.query(
+                "UPDATE FROM employee WHERE first_name = ? AND last_name = ?",
+                [firstName, lastName],
+                (err) =>{
+                  if (err) throw err;
+                  console.log("EMPLOYEE UPDATED - GREAT JOB!!🍎");
+                  promptUser();
+                }
+              );
+            });
           });
           break;
         case "Exit":
