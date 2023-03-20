@@ -30,6 +30,13 @@ async function startApp() {
           'Add a role',
           'Add an employee',
           'Update an employee role',
+          'Terminate an employee',
+          'View employee productivity',
+          'View company earnings',
+          'View company expenses',
+          'View company profits',
+          'View company cashflow',
+          'View company projections',
           'Exit'
         ]
       }
@@ -87,4 +94,132 @@ async function startApp() {
         const [roleRowsForEmps] = await connection.query('SELECT * FROM roles');
         const roleChoices = roleRowsForEmps.map(role => ({ name: role.title, value: role.id }));
         const [empRowsForMgrs] = await connection.query('SELECT * FROM employees WHERE manager_id IS NULL');
-        const mgrChoices = empRowsForMgrs.map(mgr
+        const mgrChoices = empRowsForMgrs.map(mgr => ({ name: role.title, value: role.id });
+        const { roleTitle, roleSalary, roleDept, empFirstName, empLastName } = await inquirer.prompt ([
+          {
+            type:
+            name:
+            message:
+          },
+          {
+            type:
+            name:
+            message:
+          },
+          {
+            type:
+            name:
+            message:
+          },
+          {
+            type:
+            name:
+            message:
+          },
+          {
+            type:
+            name:
+            message:            
+          }
+        ]);
+        await connection.query('INSERT INTO roles SET ?', { title: roleTitle, salary: roleSalary, department_id: roleDept });
+        console.log(`Added ${roleTitle} role`);
+        break;
+      case 'Update Employee Role':
+        const [roleRowsForEmps] = await connection.query('SELECT * FROM roles');
+        const roleChoices = roleRowsForEmps.map(role => ({ name: role.title, value: role.id }));
+        const [empRowsForMgrs] = await connection.query('SELECT * FROM employees WHERE manager_id IS NULL');
+        const mgrChoices = empRowsForMgrs.map(mgr => ({ name: role.title, value: role.id });
+        const { roleTitle, roleSalary, roleDept, empFirstName, empLastName } = await inquirer.prompt ([
+          {
+            type:
+            name:
+            message:
+          },
+          {
+            type:
+            name:
+            message:
+          },
+          {
+            type:
+            name:
+            message:
+          },
+          {
+            type:
+            name:
+            message:
+          },
+          {
+            type:
+            name:
+            message:            
+          }
+        ]);
+        await connection.query('INSERT INTO roles SET ?', { title: roleTitle, salary: roleSalary, department_id: roleDept });
+        console.log(`Added ${roleTitle} role`);
+        break;
+        case 'Terminate an employee':
+          const [roleRowsForEmps] = await connection.query('SELECT * FROM roles');
+          const roleChoices = roleRowsForEmps.map(role => ({ name: role.title, value: role.id }));
+          const [empRowsForMgrs] = await connection.query('SELECT * FROM employees WHERE manager_id IS NULL');
+          const mgrChoices = empRowsForMgrs.map(mgr => ({ name: role.title, value: role.id });
+          const { roleTitle, roleSalary, roleDept, empFirstName, empLastName } = await inquirer.prompt ([
+            {
+              type:
+              name:
+              message:
+            },
+            {
+              type:
+              name:
+              message:
+            },
+            {
+              type:
+              name:
+              message:
+            },
+            {
+              type:
+              name:
+              message:
+            },
+            {
+              type:
+              name:
+              message:            
+            }
+          ]);
+          await connection.query('DELETE FROM roles SET ?', { title: roleTitle, salary: roleSalary, department_id: roleDept });
+          console.log(`Added ${roleTitle} role`);
+          break;
+          case 'View employee productivity':
+          const [deptRows] = await connection.query('SELECT * FROM departments');
+          table(deptRows);
+          break;
+          case 'View company earnings':
+            const [deptRows] = await connection.query('SELECT * FROM departments');
+            table(deptRows);
+            break;
+            case 'View company expenses':
+              const [deptRows] = await connection.query('SELECT * FROM departments');
+              table(deptRows);
+              break;
+              case 'View company profits':
+                const [deptRows] = await connection.query('SELECT * FROM departments');
+                table(deptRows);
+                break;
+                case 'View company cashflow':
+                  const [deptRows] = await connection.query('SELECT * FROM departments');
+                  table(deptRows);
+                  break;
+                  case 'View company projections':
+                    const [deptRows] = await connection.query('SELECT * FROM departments');
+                    table(deptRows);
+                    break;
+                    case 'Exit':
+                      const [deptRows] = await connection.query('SELECT * FROM departments');
+                      table(deptRows);
+                      break;
