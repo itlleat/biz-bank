@@ -31,8 +31,7 @@ async function startApp() {
           'Add an employee',
           'Update an employee role',
           'Terminate an employee',
-          'View employee productivity',
-          'View company earnings',
+          'View employee salaries',
           'View company expenses',
           'View company profits',
           'View company cashflow',
@@ -97,9 +96,10 @@ async function startApp() {
         const mgrChoices = empRowsForMgrs.map(mgr => ({ name: role.title, value: role.id });
         const { roleTitle, roleSalary, roleDept, empFirstName, empLastName } = await inquirer.prompt ([
           {
-            type:
-            name:
-            message:
+            type:'list',
+            name:'empDep',
+            message:'Please select which department you would like to add an employee to',
+            choices: deptChoices
           },
           {
             type:
@@ -195,29 +195,25 @@ async function startApp() {
           await connection.query('DELETE FROM roles SET ?', { title: roleTitle, salary: roleSalary, department_id: roleDept });
           console.log(`Added ${roleTitle} role`);
           break;
-          case 'View employee productivity':
-          const [deptRows] = await connection.query('SELECT * FROM departments');
-          table(deptRows);
+          case 'View employee salaries':
+          const [salRows] = await connection.query('SELECT * FROM salaries');
+          table(salRows);
           break;
-          case 'View company earnings':
-            const [deptRows] = await connection.query('SELECT * FROM departments');
-            table(deptRows);
-            break;
             case 'View company expenses':
-              const [deptRows] = await connection.query('SELECT * FROM departments');
-              table(deptRows);
+              const [expRows] = await connection.query('SELECT * FROM expenses');
+              table(expRows);
               break;
               case 'View company profits':
-                const [deptRows] = await connection.query('SELECT * FROM departments');
-                table(deptRows);
+                const [profitRows] = await connection.query('SELECT * FROM profit');
+                table(profitRows);
                 break;
                 case 'View company cashflow':
-                  const [deptRows] = await connection.query('SELECT * FROM departments');
-                  table(deptRows);
+                  const [cashRows] = await connection.query('SELECT * FROM cashFlow');
+                  table(cashRows);
                   break;
                   case 'View company projections':
-                    const [deptRows] = await connection.query('SELECT * FROM departments');
-                    table(deptRows);
+                    const [projRows] = await connection.query('SELECT * FROM projections');
+                    table(projRows);
                     break;
                     case 'Exit':
                       const [deptRows] = await connection.query('SELECT * FROM departments');
