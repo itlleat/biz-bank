@@ -1,4 +1,4 @@
-uioahDROP DATABASE IF EXISTS departments_db;
+DROP DATABASE IF EXISTS departments_db;
 
 CREATE DATABASE departments_db;
 
@@ -11,13 +11,12 @@ CREATE TABLE
     );
 
 CREATE TABLE
-    revenue (
-        revenueID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-        revenueType VARCHAR(45) NOT NULL,
-        revenueAmount DECIMAL (10, 2),
-        revenueDate DATE,
-        departmentsID INT,
-        FOREIGN KEY (departmentsID),
+    role (
+        id INT PRIMARY KEY,
+        title VARCHAR(30),
+        salary DECIMAL,
+        department_id INT,
+        FOREIGN KEY (department_id)
         REFERENCES departments(id)
     );
 
@@ -51,18 +50,18 @@ CREATE TABLE
         REFERENCES departments(id)
     ),
 CREATE TABLE
-  salaries (
-        salariesID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    salaries (
+        salariesID INT PRIMARY KEY,
         salariesAmount DECIMAL(10, 2),
-        departmentID INT,
+        role_id INT,
         employeeID INT,
-        managerID INT,
-        CONSTRAINT FK_salaries_department FOREIGN KEY (departmentID)
-        REFERENCES departments(id),
+        manager_id INT,
+        CONSTRAINT FK_salaries_role FOREIGN KEY (role_id)
+        REFERENCES role(id),
         CONSTRAINT FK_salaries_employee FOREIGN KEY (employeeID)
         REFERENCES employees(id),
-        CONSTRAINT FK_salaries_manager FOREIGN KEY (managerID)
-        REFERENCES managers(id)
+        CONSTRAINT FK_salaries_manager FOREIGN KEY (manager_id)
+        REFERENCES employees(id) ON DELETE SET NULL
   );
 
 CREATE TABLE
@@ -76,21 +75,13 @@ CREATE TABLE
     ),
 CREATE TABLE
     employees (
-        id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-        name VARCHAR(30) NOT NULL,
-        departmentID INT,
-        FOREIGN KEY (departmentID) 
-        REFERENCES departments(id) ON DELETE SET NULL
-    );
-
-CREATE TABLE
-    managers (
-        id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-        name VARCHAR(30) NOT NULL,
-        departmentID INT,
-        employeeID INT,
-        CONSTRAINT FK_managers_department FOREIGN KEY (departmentID),
-        REFERENCES departments(id),
-        CONSTRAINT FK_managers_employee FOREIGN KEY (employeeID) 
+        id INT PRIMARY KEY,
+        first_name VARCHAR(30) NOT NULL,
+        last_name VARCHAR(30) NOT NULL,
+        role_id INT,
+        manager_id INT,
+        CONSTRAINT FK_employees_role FOREIGN KEY (role_id) 
+        REFERENCES role(id) ON DELETE SET NULL,
+        CONSTRAINT FK_employees_manager FOREIGN KEY (manager_id) 
         REFERENCES employees(id) ON DELETE SET NULL
     );
