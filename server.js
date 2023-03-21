@@ -184,9 +184,9 @@ async function startApp() {
               break;
               case 'View company profits 💸🤑🧧':
                 const [revenueRows] = await connection.query('SELECT SUM(salary) AS total_revenue FROM roles');
-                const [revenueRows2] = await connection.query('SELECT SUM(salary) AS total_expenses FROM roles');
+                const [expenseRows2] = await connection.query('SELECT SUM(salary) AS total_expenses FROM roles');
                 const profit = revenueRows[0].total_revenue - expenseRows2[0].total_expenses;
-                console.log(`TOTAL PROFITS BABY ${profit}`);
+                console.log(` 🤑 TOTAL PROFITS BABY!!! ${profit} 🤑`);
                 break;
                 case 'View company cashflow':
                   const [cashRows] = await connection.query('SELECT * FROM cashFlow');
@@ -197,6 +197,21 @@ async function startApp() {
                     table(projRows);
                     break;
                     case 'Exit':
-                      const [deptRows] = await connection.query('SELECT * FROM departments');
-                      table(deptRows);
-                      break;
+                      process.exit();
+                      default:
+                          console.log(`YOU SHOULDN'T BE HERE ${answer.menu}`);
+                          break;
+                          async function promptUser() {
+                            const [rows, fields] = await inquirer.prompt([
+                              {
+                                type: 'list',
+                                name: 'menu',
+                                message: 'What would you like to do?',
+                                choices: menu,
+                              },
+                            ]);
+                            return rows;
+                          }
+
+                          start();
+
