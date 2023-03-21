@@ -196,41 +196,80 @@ async function init() {
       switch (choice) {
         case 'Terminate an employee':
           const [empRows] = await connection.query('SELECT * FROM employees');
-          const empChoices = empRoles.map(emp => ({ `${emp.first_name} ${emp.last_name}`, value:emp.id }));
-          const { empId } = await inquirer.prompt ([
-            {
-              type:'list'
-              name:'empId'
-              message:'SELECT AN EMPLOYEE TO TERMINATE 🤯❌💀',
-              choices: empChoices
-            },
-          ]);
-          await connection.query('DELETE FROM employees WHERE id = ?', [empId]);
-          console.log(`⚰️💀🀹!!!EMPLOYEE DESTROYED!!!🀹💀⚰️`);
-          break;
-          case 'View employee salaries':
-          const [salaryRows] = await connection.query('SELECT CONCAT(first_name," ", last_name) AS name, salary FROM employees INNER JOIN roles ON employees.role_id = roles.id');
-          table(salaryRows);
-          break;
-            case 'View company expenses':
-              const [expenseRows] = await connection.query('SELECT SUM(salary) AS total_expenses FROM roles');
-              console.log(`Total expenses: ${expenseRows[0].total_expenses}`);
-              break;
-              case 'View company profits 💸🤑🧧':
-                const [revenueRows] = await connection.query('SELECT SUM(salary) AS total_revenue FROM roles');
-                const [revenueRows2] = await connection.query('SELECT SUM(salary) AS total_expenses FROM roles');
-                const profit = revenueRows[0].total_revenue - expenseRows2[0].total_expenses;
-                console.log(`TOTAL PROFITS BABY ${profit}`);
-                break;
-                case 'View company cashflow':
-                  const [cashRows] = await connection.query('SELECT * FROM cashFlow');
-                  table(cashRows);
-                  break;
-                  case 'View company projections':
-                    const [projRows] = await connection.query('SELECT * FROM projections');
-                    table(projRows);
-                    break;
-                    case 'Exit':
-                      const [deptRows] = await connection.query('SELECT * FROM departments');
-                      table(deptRows);
-                      break;
+          const empChoices = empRoles.map(emp => ({ `${emp.first_name} ${emp.last_name}`, value: emp.id }));
+      const { empId } = await inquirer.prompt([
+        {
+          type: 'list',
+          name: 'empId',
+          message: 'SELECT AN EMPLOYEE TO TERMINATE 🤯❌💀',
+          choices: empChoices
+        },
+      ]);
+      await connection.query('DELETE FROM employees WHERE id = ?', [empId]);
+      console.log(`⚰️💀🀹!!!EMPLOYEE DESTROYED!!!🀹💀⚰️`);
+      break;
+    }
+  };
+
+  {
+    switch (choice) {
+      case 'View employee salaries':
+        const [salaryRows] = await connection.query('SELECT CONCAT(first_name," ", last_name) AS name, salary FROM employees INNER JOIN roles ON employees.role_id = roles.id');
+        table(salaryRows);
+        break;
+    }
+  };
+
+  {
+    switch (choice) {
+      case 'View company expenses':
+        const [expenseRows] = await connection.query('SELECT SUM(salary) AS total_expenses FROM roles');
+        console.log(`Total expenses: ${expenseRows[0].total_expenses}`);
+        break;
+    }
+  };
+
+  {
+    switch (choice) {
+      case 'View company profits 💸🤑🧧':
+        const [revenueRows] = await connection.query('SELECT SUM(salary) AS total_revenue FROM roles');
+        const [revenueRows2] = await connection.query('SELECT SUM(salary) AS total_expenses FROM roles');
+        const profit = revenueRows[0].total_revenue - expenseRows2[0].total_expenses;
+        console.log(`TOTAL PROFITS BABY ${profit}`);
+        break;
+    }
+  };
+
+  {
+    switch (choice) {
+      case 'View company cashflow':
+        const [cashRows] = await connection.query('SELECT * FROM cashFlow');
+        table(cashRows);
+        break;
+    }
+  };
+
+  {
+    switch (choice) {
+      case 'View company projections':
+        const [projRows] = await connection.query('SELECT * FROM projections');
+        table(projRows);
+        break;
+    }
+  };
+
+  {
+    switch (choice) {
+      case 'Exit':
+        const [deptRows] = await connection.query('SELECT * FROM departments');
+        table(deptRows);
+        break;
+    }
+  }};
+
+} catch (error) {
+  console.log('ERROR INITIALIZING APP', error);
+}
+}
+
+init()
