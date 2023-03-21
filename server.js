@@ -161,51 +161,32 @@ async function startApp() {
         console.log(`Added ${roleTitle} role`);
         break;
         case 'Terminate an employee':
-          const [roleRowsForEmps] = await connection.query('SELECT * FROM roles');
-          const roleChoices = roleRowsForEmps.map(role => ({ name: role.title, value: role.id }));
-          const [empRowsForMgrs] = await connection.query('SELECT * FROM employees WHERE manager_id IS NULL');
-          const mgrChoices = empRowsForMgrs.map(mgr => ({ name: role.title, value: role.id });
-          const { roleTitle, roleSalary, roleDept, empFirstName, empLastName } = await inquirer.prompt ([
+          const [empRows] = await connection.query('SELECT * FROM employees');
+          const empChoices = empRoles.map(emp => ({ `${emp.first_name} ${emp.last_name}`, value:emp.id }));
+          const { empId } = await inquirer.prompt ([
             {
-              type:
-              name:
-              message:
+              type:'list'
+              name:'empId'
+              message:'SELECT AN EMPLOYEE TO TERMINATE 🤯❌💀',
+              choices: empChoices
             },
-            {
-              type:
-              name:
-              message:
-            },
-            {
-              type:
-              name:
-              message:
-            },
-            {
-              type:
-              name:
-              message:
-            },
-            {
-              type:
-              name:
-              message:            
-            }
           ]);
-          await connection.query('DELETE FROM roles SET ?', { title: roleTitle, salary: roleSalary, department_id: roleDept });
-          console.log(`Added ${roleTitle} role`);
+          await connection.query('DELETE FROM employees WHERE id = ?', [empId]);
+          console.log(`⚰️💀🀹!!!EMPLOYEE DESTROYED!!!🀹💀⚰️`);
           break;
           case 'View employee salaries':
-          const [salRows] = await connection.query('SELECT * FROM salaries');
-          table(salRows);
+          const [salaryRows] = await connection.query('SELECT CONCAT(first_name," ", last_name) AS name, salary FROM employees INNER JOIN roles ON employees.role_id = roles.id');
+          table(salaryRows);
           break;
             case 'View company expenses':
-              const [expRows] = await connection.query('SELECT * FROM expenses');
-              table(expRows);
+              const [expenseRows] = await connection.query('SELECT SUM(salary) AS total_expenses FROM roles');
+              console.log(`Total expenses: ${expenseRows[0].total_expenses}`);
               break;
-              case 'View company profits':
-                const [profitRows] = await connection.query('SELECT * FROM profit');
-                table(profitRows);
+              case 'View company profits 💸🤑🧧':
+                const [revenueRows] = await connection.query('SELECT SUM(salary) AS total_revenue FROM roles');
+                const [revenueRows2] = await connection.query('SELECT SUM(salary) AS total_expenses FROM roles');
+                const profit = revenueRows[0].total_revenue - expenseRows2[0].total_expenses;
+                console.log(`TOTAL PROFITS BABY ${profit}`);
                 break;
                 case 'View company cashflow':
                   const [cashRows] = await connection.query('SELECT * FROM cashFlow');
