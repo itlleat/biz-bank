@@ -18,9 +18,6 @@ async function init() {
     await connection.connect();
     console.log('Connected to database');
 
-    // const [deptRowsForRoles] = await connection.query('SELECT * FROM departments');
-    // const deptChoices = deptRowsForRoles.map(dept => ({ name: dept.name, value: dept.id }));
-
     const { choice } = await inquirer.prompt([
       {
         type: 'list',

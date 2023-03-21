@@ -27,7 +27,7 @@ CREATE TABLE
         expensesType VARCHAR(45) NOT NULL,
         expensesAmount DECIMAL(10, 2),
         expensesDate DATE,
-        FOREIGN KEY (departmentsID),
+        FOREIGN KEY (departmentsID)
         REFERENCES departments(id)
     );
 
@@ -37,32 +37,18 @@ CREATE TABLE
         departmentsID INT,
         profitType VARCHAR(45),
         profitAmount DECIMAL(10, 2),
-        FOREIGN KEY (departmentsID),
+        FOREIGN KEY (departmentsID)
         REFERENCES departments(id)
-    ),
+    );
 CREATE TABLE
     cashFlow (
         cashFlowID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
         departmentsID INT,
         cashFlowType VARCHAR(45),
         cashFlowAmount DECIMAL(10, 2),
-        FOREIGN KEY (departmentsID),
+        FOREIGN KEY (departmentsID)
         REFERENCES departments(id)
-    ),
-CREATE TABLE
-    salaries (
-        salariesID INT PRIMARY KEY,
-        salariesAmount DECIMAL(10, 2),
-        role_id INT,
-        employeeID INT,
-        manager_id INT,
-        CONSTRAINT FK_salaries_role FOREIGN KEY (role_id)
-        REFERENCES role(id),
-        CONSTRAINT FK_salaries_employee FOREIGN KEY (employeeID)
-        REFERENCES employees(id),
-        CONSTRAINT FK_salaries_manager FOREIGN KEY (manager_id)
-        REFERENCES employees(id) ON DELETE SET NULL
-  );
+    );
 
 CREATE TABLE
     projections (
@@ -70,9 +56,9 @@ CREATE TABLE
         departmentsID INT,
         projectionsType VARCHAR(45),
         projectionsAmount DECIMAL(10, 2),
-        FOREIGN KEY (departmentsID),
+        FOREIGN KEY (departmentsID)
         REFERENCES departments(id)
-    ),
+    );
 CREATE TABLE
     employees (
         id INT PRIMARY KEY,
@@ -85,3 +71,13 @@ CREATE TABLE
         CONSTRAINT FK_employees_manager FOREIGN KEY (manager_id) 
         REFERENCES employees(id) ON DELETE SET NULL
     );
+    CREATE TABLE salaries (
+  salariesID INT PRIMARY KEY,
+  salariesAmount DECIMAL(10, 2),
+  role_id INT,
+  employeeID INT,
+  manager_id INT,
+  CONSTRAINT FK_salaries_role FOREIGN KEY (role_id) REFERENCES role(id),
+  CONSTRAINT FK_salaries_employee FOREIGN KEY (employeeID) REFERENCES employees(id),
+  CONSTRAINT FK_salaries_manager FOREIGN KEY (manager_id) REFERENCES employees(id) ON DELETE SET NULL
+);
