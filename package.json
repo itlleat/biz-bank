@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/itlleat/biz-bank#readme",
   "dependencies": {
+    "eslint": "^8.36.0",
     "inquirer": "^8.2.4",
     "mysql2": "^3.2.0",
     "sql": "^0.78.0"
