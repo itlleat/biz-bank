@@ -174,7 +174,7 @@ CREATE TABLE projections (
 );
 
 CREATE TABLE managers (
-  id INT PRIMARY KEY,
+  id INT PRIMARY KEY AUTO_INCREMENT,
   department_id INT,
   name VARCHAR(50),
   salary DECIMAL(10,2),
@@ -183,7 +183,7 @@ CREATE TABLE managers (
 );
 
 CREATE TABLE employees (
-  id INT PRIMARY KEY,
+  id INT PRIMARY KEY AUTO_INCREMENT,
   first_name VARCHAR(30) NOT NULL,
   last_name VARCHAR(30) NOT NULL,
   role_id INT,
@@ -193,7 +193,7 @@ CREATE TABLE employees (
 );
 
 CREATE TABLE salaries (
-  salariesID INT PRIMARY KEY,
+  salariesID INT PRIMARY KEY AUTO_INCREMENT,
   salariesAmount DECIMAL(10, 2),
   role_id INT,
   employee_id INT,

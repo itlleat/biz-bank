@@ -1,206 +1,122 @@
-INSERT INTO departments (name) VALUES
-(1, 'Manufacturing'),
-(2, 'Research and Development'),
-(3, 'Genetic Engineering'),
-(4, 'Mutational Research'),
-(5, 'Data Security'),
-(6, 'Physical Security'),
-(7, 'Law Team');
+-- Departments
+INSERT INTO departments (name) VALUES 
+('Sales'), 
+('Marketing'), 
+('Human Resources'),
+('IT');
 
-INSERT INTO salaries (departmentID, employeesID, managersID, salaryType, salarymount, salaryDate) VALUES
-(1, 1, 1, 'Salary', 95000, '2023-02-09'),
-(2, 1, 2, 'Contract', 115000, '2022-08-14'),
-(3, 2, 3, 'Salary', 160000, '2021-07-04'),
-(4, 4, 1, 'Contract', 480000, '2023-03-14'),
-(5, 7, 1, 'Salary', 210000, '2022-04-20'),
-(6, 4, 2, 'Salary', 25000,'2022-09-10'),
-(7, 1, 1, 'Retainer', 3000000, '2016-03-28');
+-- Roles
+INSERT INTO roles (title, salary, department_id) VALUES 
+('Sales Manager', 70000.00, 1),
+('Sales Representative', 50000.00, 1),
+('Marketing Manager', 65000.00, 2),
+('Marketing Coordinator', 40000.00, 2),
+('HR Manager', 75000.00, 3),
+('HR Coordinator', 45000.00, 3),
+('IT Manager', 80000.00, 4),
+('IT Specialist', 55000.00, 4);
 
-INSERT INTO expenses (departmentID, employeesID, managersID, expensesType, expensesAmount, expensesDate) VALUES
- (1, 3, 2, 'Type 1', 500, '2023-03-01'),
- (2, 2, 1, 'Type 2', 1000, '2023-03-02'),
- (3, 5, 3, 'Type 3', 1500, '2023-03-03'),
- (4, 1, 3, 'Type 4', 2000, '2023-03-04'),
- (5, 6, 1, 'Type 5', 2500, '2023-03-05'),
- (6, 4, 1, 'Type 6', 3000, '2023-03-06'),
- (7, 7, 2, 'Type 7', 3500, '2023-03-07');
+-- Expenses
+INSERT INTO expenses (department_id, expensesType, expensesAmount, expensesDate) VALUES 
+(1, 'Travel', 1500.00, '2022-01-15'),
+(1, 'Office Supplies', 500.00, '2022-02-05'),
+(2, 'Advertising', 2500.00, '2022-03-10'),
+(2, 'Market Research', 3000.00, '2022-04-25'),
+(3, 'Training', 1000.00, '2022-05-30'),
+(3, 'Employee Benefits', 3500.00, '2022-06-15'),
+(4, 'Software Licenses', 2000.00, '2022-07-20'),
+(4, 'Hardware Upgrades', 4500.00, '2022-08-05');
 
-INSERT INTO profit (departmentID, profitType, profitAmount) VALUES
-(1, 'profit type #', 1000),
-(2, 'profit type #', 1000),
-(3, 'profit type #', 1000),
-(4, 'profit type #', 1000),
-(5, 'profit type #', 1000),
-(6, 'profit type #', 1000),
-(7, 'profit type #', 1000);
+-- Profit
+INSERT INTO profit (department_id, profitType, profitAmount) VALUES 
+(1, 'Sales', 200000.00),
+(1, 'Services', 50000.00),
+(2, 'Product Sales', 75000.00),
+(2, 'Consulting', 100000.00),
+(3, 'HR Consulting', 10000.00),
+(3, 'Training Services', 25000.00),
+(4, 'IT Services', 125000.00),
+(4, 'Product Development', 50000.00);
 
-INSERT INTO cashFlow (departmentID, cashFlowType, cashFlowAmount) VALUES
-(1, 'cash flow type', 1000),
-(2, 'cash flow type', 1000),
-(3, 'cash flow type', 1000),
-(4, 'cash flow type', 1000),
-(5, 'cash flow type', 1000),
-(6, 'cash flow type', 1000),
-(7, 'cash flow type', 1000);
+-- Cash Flow
+INSERT INTO cashFlow (department_id, cashFlowType, cashFlowAmount) VALUES 
+(1, 'Inflows', 300000.00),
+(1, 'Outflows', 100000.00),
+(2, 'Inflows', 200000.00),
+(2, 'Outflows', 100000.00),
+(3, 'Inflows', 150000.00),
+(3, 'Outflows', 75000.00),
+(4, 'Inflows', 250000.00),
+(4, 'Outflows', 150000.00);
 
-INSERT INTO revenue (revenueID, departmentID, revenueType, revenueAmount, revenueDate) VALUES
-(1, 1, 'Sales', 2000000, '2023-03-16'),
-(2, 2, 'Grants', 500000, '2023-03-15'),
-(3, 3, 'Licensing', 750000, '2023-03-14'),
-(4, 4, 'Research contracts', 1000000, '2023-03-13'),
-(5, 5, 'Consulting', 1250000, '2023-03-12'),
-(6, 6, 'Physical security services', 250000, '2023-03-11'),
-(7, 7, 'Legal fees', 500000, '2023-03-10');
+-- Projections
+INSERT INTO projections (department_id, projectionsType, projectionsAmount) VALUES 
+(1, 'Sales', 400000.00),
+(1, 'Services', 100000.00),
+(2, 'Product Sales', 125000.00),
+(2, 'Consulting', 150000.00),
+(3, 'HR Consulting', 20000.00),
+(3, 'Training Services', 50000.00),
+(4, 'IT Services', 200000.00),
+(4, 'Product Development', 75000.00);
 
+INSERT INTO managers (id, department_id, name, salary, hireDate) VALUES 
+(1, 1, 'John Smith', 90000.00, '2020-01-01'),
+(2, 2, 'Jane Doe', 95000.00, '2021-01-01');
 
-INSERT INTO projections (projectionsID, departmentID, employeesID, name, projectionsType, projectionsAmount) VALUES
-(1, 1, 1, 'Production', 'Sales', 2250000),
-(2, 2, 2, 'Innovation', 'Grants', 750000),
-(3, 3, 3, 'Research', 'Licensing', 1000000),
-(4, 4, 4, 'Development', 'Research contracts', 1500000),
-(5, 5, 5, 'Data security', 'Consulting', 2000000),
-(6, 6, 6, 'Security', 'Physical security services', 300000),
-(7, 7, 7, 'Legal', 'Legal fees', 1000000);
+INSERT INTO employees (id, first_name, last_name, role_id, manager_id) VALUES 
+(1, 'Bob', 'Johnson', 2, 1),
+(2, 'Sarah', 'Lee', 2, 1),
+(3, 'Tom', 'Brown', 4, 2),
+(4, 'Emily', 'Davis', 4, 2);
 
-INSERT INTO employees (employeesID, name, departmentID,) VALUES
-(1, 'Leonardo da Vinci', 1),
-(2, 'Cleopatra', 2),
-(3, 'Julius Caesar', 3),
-(4, 'Napoleon Bonaparte', 4),
-(5, 'George Washington', 5),
-(6, 'Winston Churchill', 6),
-(7, 'Mahatma Gandhi', 7),
-(8, 'Martin Luther King Jr.', 1),
-(9, 'Albert Einstein', 2),
-(10, 'Isaac Newton', 3),
-(11, 'Galileo Galilei', 4),
-(12, 'William Shakespeare', 5),
-(13, 'Marilyn Monroe', 6),
-(14, 'Elvis Presley', 7),
-(15, 'Michael Jackson', 1),
-(16, 'Queen Elizabeth I', 2),
-(17, 'Abraham Lincoln', 3),
-(18, 'Nelson Mandela', 4),
-(19, 'Mother Teresa', 5),
-(20, 'Neil Armstrong', 6),
-(21, 'Steve Jobs', 7),
-(22, 'Albert Schweitzer', 1),
-(23, 'Thomas Edison', 2),
-(24, 'Alexander Graham Bell', 3),
-(25, 'Henry Ford', 4),
-(26, 'Charles Darwin', 5),
-(27, 'Sigmund Freud', 6),
-(28, 'Marie Curie', 7),
-(29, 'Mahmoud Abbas', 1),
-(30, 'Indira Gandhi', 2),
-(31, 'Vladimir Lenin', 3),
-(32, 'Joseph Stalin', 4),
-(33, 'Mao Zedong', 5),
-(34, 'Fidel Castro', 6),
-(35, 'Ayatollah Khomeini', 7),
-(36, 'Pablo Picasso', 1),
-(37, 'Salvador Dali', 2),
-(38, 'Vincent van Gogh', 3),
-(39, 'Michelangelo', 4),
-(40, 'Rembrandt', 5),
-(41, 'Claude Monet', 6),
-(42, 'Georgia O Keeffe', 7),
-(43, 'Aristotle', 1),
-(44, 'Plato', 2),
-(45, 'Socrates', 3),
-(46, 'Rene Descartes', 4),
-(47, 'Immanuel Kant', 5),
-(48, 'Friedrich Nietzsche', 6),
-(49, 'Jean-Paul Sartre', 7),
-(50, 'John Locke', 1),
-(51, 'David Hume', 2),
-(52, 'Adam Smith', 3),
-(53, 'Karl Marx', 4),
-(54, 'John Stuart Mill', 5),
-(55, 'Soren Kierkegaard', 6),
-(56, 'Martin Heidegger', 7),
-(57, 'Christopher Columbus', 1),
-(58, 'Vasco da Gama', 2),
-(59, 'Francis Drake', 3),
-(60, 'Captain Cook', 4),
-(61, 'Charles Lindbergh', 5),
-(62, 'Amelia Earhart', 6),
-(63, 'Buzz Aldrin', 7),
-(64, 'Johann Sebastian Bach', 1),
-(65, 'Wolfgang Amadeus Mozart', 2),
-(66, 'Ludwig van Beethoven', 3),
-(67, 'Frederic Chopin', 4),
-(68, 'Franz Liszt', 5),
-(69, 'Johannes Brahms', 6),
-(70, 'Igor Stravinsky', 7),
-(71, 'George Frideric Handel', 1),
-(72, 'Giuseppe Verdi', 2),
-(73, 'Richard Wagner', 3),
-(74, 'Gustav Mahler', 4),
-(75, 'Claude Debussy', 5),
-(76, 'Maurice Ravel', 6),
-(77, 'Duke Ellington', 7),
-(78, 'Miles Davis', 1),
-(79, 'John Coltrane', 2),
-(80, 'Bob Dylan', 3),
-(81, 'Jimi Hendrix', 4),
-(82, 'The Beatles', 5),
-(83, 'Led Zeppelin', 6),
-(84, 'Pink Floyd', 7),
-(85, 'Babe Ruth', 1),
-(86, 'Muhammad Ali', 2),
-(87, 'Pele', 3),
-(88, 'Michael Jordan', 4),
-(89, 'Tiger Woods', 5),
-(90, 'Serena Williams', 6),
-(91, 'Usain Bolt', 7),
-(92, 'Socrates', 1),
-(93, 'Plato', 2),
-(94, 'Aristotle', 3),
-(95, 'Sun Tzu', 4),
-(96, 'Lao Tzu', 5),
-(97, 'Confucius', 6),
-(98, 'Buddha', 7),
-(99, 'Marquis de Sade', 1),
-(100, 'Voltaire', 2),
-(101, 'Jean-Jacques Rousseau', 3),
-(102, 'Immanuel Kant', 4),
-(103, 'Friedrich Nietzsche', 5),
-(104, 'Sigmund Freud', 6),
-(105, 'Jean-Paul Sartre', 7),
-(106, 'George Orwell', 1),
-(107, 'Ernest Hemingway', 2),
-(108, 'William Faulkner', 3),
-(109, 'J.D. Salinger', 4),
-(110, 'Vladimir Nabokov', 5),
-(111, 'Gabriel Garcia Marquez', 6),
-(112, 'Toni Morrison', 7),
-(113, 'Vincent Price', 1),
-(114, 'Peter Cushing', 2),
-(115, 'Christopher Lee', 3),
-(116, 'Boris Karloff', 4),
-(117, 'Lon Chaney', 5),
-(118, 'Bela Lugosi', 6),
-(119, 'Alfred Hitchcock', 7),
-(120, 'Steven Spielberg', 1),
-(121, 'George Lucas', 2),
-(122, 'James Cameron', 3),
-(123, 'Peter Jackson', 4),
-(124, 'Christopher Nolan', 5),
-(125, 'Quentin Tarantino', 6),
-(126, 'Martin Scorsese', 7),
-(127, 'Walt Disney', 1);
+-- salaries table
+INSERT INTO salaries (salariesAmount, role_id, employee_id, manager_id)
+VALUES
+(55000.00, 1, 1, NULL),
+(65000.00, 2, 2, 1),
+(75000.00, 3, 3, 1),
+(60000.00, 2, 4, 2),
+(80000.00, 3, 5, 2),
+(70000.00, 3, 6, 2),
+(60000.00, 2, 7, 3),
+(85000.00, 3, 8, 3),
+(75000.00, 3, 9, 3);
+
+-- revenue table
+INSERT INTO revenue (department_id, revenueType, revenueAmount)
+VALUES
+(1, 'Sales', 1000000.00),
+(2, 'Marketing', 800000.00),
+(3, 'Operations', 1200000.00),
+(4, 'HR', 500000.00),
+(5, 'Finance', 1500000.00);
+
+-- employee_revenue table
+INSERT INTO employee_revenue (employee_id, revenueAmount)
+VALUES
+(1, 50000.00),
+(2, 65000.00),
+(3, 75000.00),
+(4, 60000.00),
+(5, 80000.00),
+(6, 70000.00),
+(7, 60000.00),
+(8, 85000.00),
+(9, 75000.00);
+
+-- manager_revenue table
+INSERT INTO manager_revenue (manager_id, revenueType, revenueAmount)
+VALUES
+(1, 'Sales', 500000.00),
+(1, 'Marketing', 300000.00),
+(2, 'Operations', 600000.00),
+(3, 'HR', 400000.00),
+(3, 'Finance', 750000.00);
 
 
 
 
-INSERT INTO managers (managersID, name, departmentID) VALUES
-(1, 'Leonardo da Vinci', 1),
-(2, 'Cleopatra', 2),
-(3, 'Julius Caesar', 3),
-(4, 'Napoleon Bonaparte', 4),
-(5, 'George Washington', 5),
-(6, 'Winston Churchill', 6),
-(7, 'Mahatma Gandhi', 7);
+
 
     
