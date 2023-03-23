@@ -60,9 +60,9 @@ INSERT INTO projections (department_id, projectionsType, projectionsAmount) VALU
 (4, 'IT Services', 200000.00),
 (4, 'Product Development', 75000.00);
 
-INSERT INTO managers (id, department_id, name, salary, hireDate) VALUES 
-(1, 1, 'John Smith', 90000.00, '2020-01-01'),
-(2, 2, 'Jane Doe', 95000.00, '2021-01-01');
+INSERT INTO managers (department_id, name, salary, hireDate) VALUES 
+(1, 'John Smith', 90000.00, '2020-01-01'),
+(2, 'Jane Doe', 95000.00, '2021-01-01');
 
 INSERT INTO employees (id, first_name, last_name, role_id, manager_id) VALUES 
 (1, 'Bob', 'Johnson', 2, 1),

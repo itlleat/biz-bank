@@ -1,7 +1,7 @@
 const express = require('express');
 const inquirer = require('inquirer');
 const mysql = require('mysql2/promise');
-const { table } = require('console-table-printer');
+const table = require('console.table');
 // const connection = require('./routes/connection');
 
 const PORT = process.env.PORT || 3001;
@@ -58,8 +58,14 @@ async function start () {
     switch (choice) {
       case 'View all departments':
         try {
+          const connection = await mysql.createConnection({
+            host: '127.0.0.1',
+            user: 'root',
+            password: 'your_new_password',
+            database: 'departments_db'
+          });
           const [deptRows] = await connection.query('SELECT * FROM departments');
-          table(deptRows);
+          console.table(deptRows);
         } catch (err) {
           console.error(`Error viewing departments: ${err}`);
           break;
@@ -70,8 +76,14 @@ async function start () {
     switch (choice) {
       case 'View all roles':
         try {
+          const connection = await mysql.createConnection({
+            host: '127.0.0.1',
+            user: 'root',
+            password: 'your_new_password',
+            database: 'departments_db'
+          });
           const [roleRows] = await connection.query('SELECT roles.id, roles.title, departments.name AS department, roles.salary FROM roles INNER JOIN departments ON roles.department_id = departments.id');
-          table(roleRows);
+         console.table(roleRows);
         } catch (err) {
           console.error(`Error viewing departments: ${err}`);
           break;
@@ -82,8 +94,14 @@ async function start () {
     switch (choice) {
       case 'View all employees':
         try {
+          const connection = await mysql.createConnection({
+            host: '127.0.0.1',
+            user: 'root',
+            password: 'your_new_password',
+            database: 'departments_db'
+          });
           const [empRows] = await connection.query('SELECT employees.id, employees.first_name, employees.last_name, roles.title, departments.name AS department, roles.salary, CONCAT(managers.first_name, " ", managers.last_name) AS manager FROM employees INNER JOIN roles ON employees.role_id = roles.id INNER JOIN departments ON roles.department_id = departments.id LEFT JOIN employees managers ON employees.manager_id = managers.id');
-          table(empRows);
+          console.table(empRows);
         } catch (err) {
           console.error(`Error viewing departments: ${err}`);
           break;
@@ -94,6 +112,12 @@ async function start () {
     switch (choice) {
       case 'Add a department':
         try {
+          const connection = await mysql.createConnection({
+            host: '127.0.0.1',
+            user: 'root',
+            password: 'your_new_password',
+            database: 'departments_db'
+          });
           const { deptName } = await inquirer.prompt([
             {
               type: 'input',
@@ -113,6 +137,12 @@ async function start () {
     switch (choice) {
       case 'Add a role':
         try {
+          const connection = await mysql.createConnection({
+            host: '127.0.0.1',
+            user: 'root',
+            password: 'your_new_password',
+            database: 'departments_db'
+          });
           const [deptRowsForRoles] = await connection.query('SELECT * FROM departments');
           const deptChoices = deptRowsForRoles.map(dept => ({ name: dept.name, value: dept.id }));
           const { roleTitle, roleSalary, roleDept } = await inquirer.prompt([
@@ -145,6 +175,12 @@ async function start () {
     switch (choice) {
       case 'Add an employee':
         try {
+          const connection = await mysql.createConnection({
+            host: '127.0.0.1',
+            user: 'root',
+            password: 'your_new_password',
+            database: 'departments_db'
+          });
           const [roleRowsForEmps] = await connection.query('SELECT * FROM roles');
           const roleChoices = roleRowsForEmps.map(role => ({ name: role.title, value: role.id }));
           const [empRowsForMgrs] = await connection.query('SELECT * FROM employees WHERE manager_id IS NULL');
@@ -196,6 +232,12 @@ async function start () {
     switch (choice) {
       case 'Update Employee Role':
         try {
+          const connection = await mysql.createConnection({
+            host: '127.0.0.1',
+            user: 'root',
+            password: 'your_new_password',
+            database: 'departments_db'
+          });
           const [empRows] = await connection.query('SELECT * FROM employees');
           const empChoices = empRows.map(emp => ({ name: `${emp.first_name} ${emp.last_name}`, value: emp.id }));
           const [roleRows] = await connection.query('SELECT * FROM roles');
@@ -226,6 +268,12 @@ async function start () {
     switch (choice) {
       case 'Terminate an employee':
         try {
+          const connection = await mysql.createConnection({
+            host: '127.0.0.1',
+            user: 'root',
+            password: 'your_new_password',
+            database: 'departments_db'
+          });
           const [empRows] = await connection.query('SELECT * FROM employees');
           const empChoices = empRoles.map(emp => ({ name: emp.first_name + ' ' + emp.last_name, value: emp.id }));
           const { empId } = await inquirer.prompt([
@@ -248,8 +296,14 @@ async function start () {
     switch (choice) {
       case 'View employee salaries':
         try {
+          const connection = await mysql.createConnection({
+            host: '127.0.0.1',
+            user: 'root',
+            password: 'your_new_password',
+            database: 'departments_db'
+          });
           const [salaryRows] = await connection.query('SELECT CONCAT(first_name," ", last_name) AS name, salary FROM employees INNER JOIN roles ON employees.role_id = roles.id');
-          table(salaryRows);
+          console.table(salaryRows);
         } catch (err) {
           console.error(`Error viewing departments: ${err}`);
           break;
@@ -260,6 +314,12 @@ async function start () {
     switch (choice) {
       case 'View company expenses':
         try {
+          const connection = await mysql.createConnection({
+            host: '127.0.0.1',
+            user: 'root',
+            password: 'your_new_password',
+            database: 'departments_db'
+          });
           const [expenseRows] = await connection.query('SELECT SUM(salary) AS total_expenses FROM roles');
           console.log(`Total expenses: ${expenseRows[0].total_expenses}`);
         } catch (err) {
@@ -272,6 +332,12 @@ async function start () {
     switch (choice) {
       case 'View company profits 💸🤑🧧':
         try {
+          const connection = await mysql.createConnection({
+            host: '127.0.0.1',
+            user: 'root',
+            password: 'your_new_password',
+            database: 'departments_db'
+          });
           const [revenueRows] = await connection.query('SELECT SUM(salary) AS total_revenue FROM roles');
           const [revenueRows2] = await connection.query('SELECT SUM(salary) AS total_expenses FROM roles');
           const profit = revenueRows[0].total_revenue - expenseRows2[0].total_expenses;
@@ -286,8 +352,14 @@ async function start () {
       switch (choice) {
         case 'View company cashflow':
           try {
+            const connection = await mysql.createConnection({
+              host: '127.0.0.1',
+              user: 'root',
+              password: 'your_new_password',
+              database: 'departments_db'
+            });
             const [cashRows] = await connection.query('SELECT * FROM cashFlow');
-            table(cashRows);
+            console.table(cashRows);
           } catch (err) {
             console.error(`Error viewing departments: ${err}`);
             break;
@@ -298,8 +370,14 @@ async function start () {
         switch (choice) {
           case 'View company projections':
             try {
+              const connection = await mysql.createConnection({
+                host: '127.0.0.1',
+                user: 'root',
+                password: 'your_new_password',
+                database: 'departments_db'
+              });
               const [projRows] = await connection.query('SELECT * FROM projections');
-              table(projRows);
+              console.table(projRows);
             } catch (err) {
               console.error(`Error viewing departments: ${err}`);
               break;
@@ -310,8 +388,14 @@ async function start () {
           switch (choice) {
             case 'Exit':
               try {
+                const connection = await mysql.createConnection({
+                  host: '127.0.0.1',
+                  user: 'root',
+                  password: 'your_new_password',
+                  database: 'departments_db'
+                });
                 const [deptRows] = await connection.query('SELECT * FROM departments');
-                table(deptRows);
+                console.table(deptRows);
               } catch (err) {
                 console.error(`Error viewing departments: ${err}`);
                 break;
