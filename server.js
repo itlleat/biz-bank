@@ -70,7 +70,9 @@ async function start () {
           console.error(`Error viewing departments: ${err}`);
           break;
         }
-    };
+        await start();
+        break;
+      };
 
 
     switch (choice) {
@@ -88,6 +90,8 @@ async function start () {
           console.error(`Error viewing departments: ${err}`);
           break;
         }
+        await start();
+        break;
     };
 
 
@@ -106,6 +110,8 @@ async function start () {
           console.error(`Error viewing departments: ${err}`);
           break;
         }
+        await start();
+        break;
     };
 
 
@@ -131,6 +137,8 @@ async function start () {
           console.error(`Error viewing departments: ${err}`);
           break;
         }
+        await start();
+        break;
     };
 
 
@@ -169,6 +177,8 @@ async function start () {
           console.error(`Error viewing departments: ${err}`);
           break;
         }
+        await start();
+        break;
     };
 
 
@@ -183,8 +193,10 @@ async function start () {
           });
           const [roleRowsForEmps] = await connection.query('SELECT * FROM roles');
           const roleChoices = roleRowsForEmps.map(role => ({ name: role.title, value: role.id }));
-          const [empRowsForMgrs] = await connection.query('SELECT * FROM employees WHERE manager_id IS NULL');
-          const mgrChoices = empRowsForMgrs.map(mgr => ({ name: `${mgr.first_name} ${mgr.last_name}`, value: mgr.id }));
+          const [deptRowsForRoles] = await connection.query('SELECT * FROM departments');
+          const deptChoices = deptRowsForRoles.map(dept => ({ name: dept.name, value: dept.id }));
+          const [empRowsForMgrs] = await connection.query('SELECT * FROM managers');
+          const mgrChoices = empRowsForMgrs.map(mgr => ({ name: `${mgr.first_name} ${mgr.last_name}` }));
           const { roleTitle, roleSalary, roleDept, empFirstName, empLastName } = await inquirer.prompt([
             {
               type: 'list',
@@ -226,6 +238,8 @@ async function start () {
           console.error(`Error viewing departments: ${err}`);
           break;
         }
+        await start();
+        break;
     };
 
 
@@ -239,29 +253,31 @@ async function start () {
             database: 'departments_db'
           });
           const [empRows] = await connection.query('SELECT * FROM employees');
-          const empChoices = empRows.map(emp => ({ name: `${emp.first_name} ${emp.last_name}`, value: emp.id }));
+          const empChoices = empRows.map(emp => ({ name: emp.first_name + ' ' + emp.last_name, value: emp }));
           const [roleRows] = await connection.query('SELECT * FROM roles');
-          const roleChoices = roleRows.map(role => ({ name: role.title, value: role.id }));
-          const { roleTitle, roleSalary, roleDept, empFirstName, empLastName } = await inquirer.prompt([
+          const roleChoices = roleRows.map(role => ({ name: role.title, value: role }));
+          const { empToUpdate, newRole } = await inquirer.prompt([
             {
               type: 'list',
               name: 'empToUpdate',
               message: 'Please select an employee to update:',
-              choices: 'empChoices'
+              choices: empChoices.map(emp => ({ name: emp.name, value: emp }))
             },
             {
               type: 'list',
               name: 'newRole',
               message: 'Please select a new role for the employee:',
-              choices: roleChoices
+              choices: roleChoices.map(role => ({ name: role.name, value: role }))
             }
           ]);
-          await connection.query('UPDATE employees SET role_id = ? WHERE id = ?', [newRole, empToUpdate]);
+          await connection.query('UPDATE employees SET role_id = ? WHERE id = ?', [newRole.id, empToUpdate.id]);
           console.log(`Employee ID ${empToUpdate} has been transferred to new ID ${newRole}.`);
         } catch (err) {
           console.error(`Error viewing departments: ${err}`);
           break;
         }
+        await start();
+        break;
     };
 
 
@@ -275,7 +291,7 @@ async function start () {
             database: 'departments_db'
           });
           const [empRows] = await connection.query('SELECT * FROM employees');
-          const empChoices = empRoles.map(emp => ({ name: emp.first_name + ' ' + emp.last_name, value: emp.id }));
+          const empChoices = empRows.map(emp => ({ name: emp.first_name + ' ' + emp.last_name, value: emp.id }));
           const { empId } = await inquirer.prompt([
             {
               type: 'list',
@@ -290,6 +306,8 @@ async function start () {
           console.error(`Error viewing departments: ${err}`);
           break;
         }
+        await start();
+        break;
     };
 
 
@@ -308,6 +326,8 @@ async function start () {
           console.error(`Error viewing departments: ${err}`);
           break;
         }
+        await start();
+        break;
     };
 
 
@@ -326,6 +346,8 @@ async function start () {
           console.error(`Error viewing departments: ${err}`);
           break;
         }
+        await start();
+        break;
     };
 
 
@@ -346,6 +368,8 @@ async function start () {
           console.error(`Error viewing departments: ${err}`);
           break;
         }
+        await start();
+        break;
     };
 
     
@@ -364,6 +388,8 @@ async function start () {
             console.error(`Error viewing departments: ${err}`);
             break;
           }
+          await start();
+          break;
       };
 
       {
@@ -382,31 +408,21 @@ async function start () {
               console.error(`Error viewing departments: ${err}`);
               break;
             }
-        };
-
-        {
-          switch (choice) {
-            case 'Exit':
-              try {
-                const connection = await mysql.createConnection({
-                  host: '127.0.0.1',
-                  user: 'root',
-                  password: 'your_new_password',
-                  database: 'departments_db'
-                });
-                const [deptRows] = await connection.query('SELECT * FROM departments');
-                console.table(deptRows);
-              } catch (err) {
-                console.error(`Error viewing departments: ${err}`);
-                break;
-              }
-          }
-        };
-      
+            await start();
+            break;
+        };    
       };  
-      // } catch (error) {
-      //   console.log(`Error: ${error}`);
-      };    
+     switch (choice) { 
+      case 'Exit':
+        console.log("Exiting program...");
+        process.exit(0);
+        break;
+  
+      default:
+        console.log("Invalid choice, please try again.");
+        await start();
+        break;
+}};    
 
 
     start();
