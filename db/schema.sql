@@ -176,7 +176,9 @@ CREATE TABLE projections (
 CREATE TABLE managers (
   id INT PRIMARY KEY AUTO_INCREMENT,
   department_id INT,
-  name VARCHAR(50),
+  manager_id INT,
+  first_name VARCHAR(30) NOT NULL,
+  last_name VARCHAR(30) NOT NULL,
   salary DECIMAL(10,2),
   hireDate DATE,
   CONSTRAINT fk_departmentID FOREIGN KEY (department_id) REFERENCES departments(id)
