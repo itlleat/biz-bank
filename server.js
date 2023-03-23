@@ -24,12 +24,6 @@ const connection = mysql.createConnection(
 
 
 async function start () {
-  const connection = mysql.createConnection;
-
-  // console.log('Initializing the app......')
-  // await connection();
-  // console.log('Connected to database');
-  // try {
     const { choice } = await inquirer.prompt([
       {
         type: 'list',
@@ -273,7 +267,7 @@ async function start () {
           await connection.query('UPDATE employees SET role_id = ? WHERE id = ?', [newRole.id, empToUpdate.id]);
           console.log(`Employee ID ${empToUpdate} has been transferred to new ID ${newRole}.`);
         } catch (err) {
-          console.error(`Error viewing departments: ${err}`);
+          console.error(`${err}`);
           break;
         }
         await start();
